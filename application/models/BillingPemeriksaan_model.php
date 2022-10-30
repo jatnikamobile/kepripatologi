@@ -460,12 +460,11 @@ class BillingPemeriksaan_model extends MY_Model {
 		}else{
 			$this->sv->where('t.KdKelas ', $rajal );
 		}
-
-			$this->sv->where('t.KdKelas ', $rajal );
+			// $this->sv->where('t.KdKelas ', $rajal );
 		$detail_tarif = $this->sv->limit(1)->get()->row_array();
 		// echo '<pre>'; print_r($detail_tarif); exit();
 
-		if(empty($detail_tarif)) return FALSE;
+		if(empty($detail_tarif)) return FALSEt;
 
 		$data = array_merge($head, $detail_tarif, [
 			'NoTran'        => $no_tran,
