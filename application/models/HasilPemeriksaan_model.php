@@ -13,10 +13,11 @@ class HasilPemeriksaan_model extends MY_Model {
 
 	public function get_head_hasil_pemeriksaan($notran)
 	{
-		$data = $this->sv->select('head.*,register.nikktp as Nik, headbilling.TglSampel, headbilling.AsalSampel, headbilling.Verifikasi, headbilling.Setujui , register.Firstname, register.KdSex, register.KdTuju, register.KdCbayar, kategori.NmKategori, register.Bod, headbilling.KdDoc, headbilling.NmDoc, headbilling.KdBangsal, bangsal.NmBangsal, kelas.NMkelas, poli.NMPoli, dokter.NmDoc as dokterPemeriksa, master.Address, headbilling.TglSampel, headbilling.kewarganegaraan, headbilling.AsalSampel, g.NmGroup, h.Tarif')->from('HasilPatologi head')
-			->join('Register register', 'head.Regno = register.Regno')
+		$data = $this->sv->select('head.*,register.nikktp as Nik, headbilling.TglSampel, headbilling.AsalSampel, headbilling.Verifikasi, headbilling.Setujui , register.Firstname, register.KdSex, register.KdTuju, register.KdCbayar, kategori.NmKategori, register.Bod, headbilling.KdDoc, headbilling.NmDoc, headbilling.KdBangsal, bangsal.NmBangsal, kelas.NMkelas, poli.NMPoli, dokter.NmDoc as dokterPemeriksa, master.Address, headbilling.TglSampel, headbilling.kewarganegaraan, headbilling.AsalSampel, g.NmGroup, h.Tarif')
+			->from('HasilPatologi head')
+			->join('Register register', 'head.Regno = register.Regno', 'INNER')
 			->join('MasterPS master', 'register.Medrec = master.Medrec', 'LEFT')
-			->join('HeadBilPatologi headbilling', 'head.Notran = headbilling.NoTran')
+			->join('HeadBilPatologi headbilling', 'head.NoTran = headbilling.NoTran', 'LEFT')
 			->join("TBLBangsal bangsal", "headbilling.KdBangsal = bangsal.KdBangsal", "LEFT")
 			->join("TBLKelas kelas", "headbilling.KdKelas = kelas.KdKelas", "LEFT")
 			->join("POLItpp poli", "headbilling.KdPoli = poli.KDPoli", "LEFT")
@@ -24,7 +25,7 @@ class HasilPemeriksaan_model extends MY_Model {
 			->join("TblKategoriPsn kategori", "headbilling.Kategori = kategori.KdKategori", "LEFT")
 			->join('fGroupPatologi g', 'head.KdGroup = g.KDGroup', 'LEFT')
 			->join('fTarifPatologi h', 'h.KDDetail = head.KDDetail', 'LEFT')
-			->where('head.Notran', $notran)->get()->result();
+			->where('head.NoTran', $notran)->get()->row();
 		return $data;
 	}
 
@@ -336,7 +337,7 @@ class HasilPemeriksaan_model extends MY_Model {
 			->from('HasilPatologi detail')
 			->join('fGroupPatologi g', 'substring(detail.KdGroup, 1, 2) = g.KDGroup', 'LEFT')
 			->join('fTarifPatologi h', 'h.KDDetail = detail.KDDetail', 'LEFT')
-			->group_by('detail.KdGroup')->group_by('g.NmGroup')
+			->group_by('detail.KdGroup')->group_by('g.NmGroup')->group_by('h.Tarif')
 			->where('detail.NoTran', $notran);
 
 		if(!empty($custom_detail))
@@ -354,9 +355,10 @@ class HasilPemeriksaan_model extends MY_Model {
 
 	public function search_detail_print($kdgroup, $nmgroup, $notran, $custom_detail = NULL)
 	{
-		$this->sv->select([
-			'detail.*',
-		])
+		/*$this->sv->select([
+			'detail.*', 
+		])*/
+		$this->sv->select("detail.*, CONCAT('','') as Hasil, CONCAT('','') as KdInput")
 		->from('HasilPatologi detail')
 		->join('fPemeriksaanPatologi AS pl', 'detail.KDDetail=pl.KDDetail', 'LEFT')
 		->where('detail.NoTran', $notran)

@@ -274,6 +274,8 @@ class HasilPemeriksaan extends CI_Controller
 		$profil = $this->hpm->get_fprofile();
 		// echo "<pre>"; print_r($infoCovid19); die();
 		$detail = $this->hpm->search_group_print($notransaksi, $custom_detail);
+
+		//print_r($head); exit();
 		$parse = array(
 			'head' => $head,
 			'detail' => $detail,

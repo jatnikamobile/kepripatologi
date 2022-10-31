@@ -89,7 +89,7 @@
                 <?php $a=1; for ($i=0; $i < count($detail); $i++):?>
                 <tr >
                   <td style="width: 42px; text-align: center; float: center; padding-top: 34px; padding-bottom: 34px;"><?=$a++?></td>
-                  <td style="width: 72px; text-align: center; float: center;"><?= $head->Nolab ?></td>
+                  <td style="width: 72px; text-align: center; float: center;"><?= $head->NoTran//$head->Nolab ?></td>
                   <td style="width: 113px; text-align: center; float: center;"><?= $head->Firstname ?></td>
                   <td style="width: 56.6px; text-align: center; float: center;"><?php $now = new DateTime(); $brt = new DateTime($head->Bod); $interval = $now->diff($brt); echo $interval->y; ?> Tahun</td>
                   <td style="width: 98px; text-align: center; float: center;"><?= $head->Sex ?></td>
