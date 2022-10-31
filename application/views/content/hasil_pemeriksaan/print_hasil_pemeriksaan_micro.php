@@ -145,7 +145,7 @@
                   <td width="50%" align="center">
                     <table style="border: 0px; text-align: center;">
                       <tr>
-                        <td>Jakarta, <?= $tgl_ttd ?> </td>
+                        <td>Tanjung Pinang, <?= $tgl_ttd ? $tgl_ttd : date('d-m-Y') ?> </td>
                       </tr>
                       <tr>
                         <td>Kepala <?= $profil->Keterangan ?>,
