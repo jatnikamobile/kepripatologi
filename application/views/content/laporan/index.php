@@ -132,13 +132,6 @@
             $('#instansi').css("display", "none");
         }
 
-        var table = $('#kel_pemeriksaan2').DataTable({
-          paging: false,
-          ajax: {
-            "url": '<?php echo base_url('Laporan/getSampleData')?>',
-          }
-        });
-
         tabel = $('#kel_pemeriksaan').DataTable({
             dom : "fBi", 
             paging: false,
