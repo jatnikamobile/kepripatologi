@@ -160,7 +160,7 @@ class HasilPemeriksaan extends CI_Controller
 		$head = $this->hpm->get_head_hasil_pemeriksaan($param);
 		$this->output
 	    	->set_content_type('json')
-	    	->set_output(json_encode($head[0]));
+	    	->set_output(json_encode($head));
 	}
 
 	public function get_pasien_by_notran_table_detail()
