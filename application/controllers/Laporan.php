@@ -27,6 +27,20 @@ class Laporan extends CI_Controller {
 		$this->load->view('layouts/wrapper', $parse);
 	}
 
+	private function _dateFormat($date){
+		$d = explode('-', $date);
+		return $d[2].'-'.$d[1].'-'.$d[0];
+	}
+
+	public function getSampleData(){
+		$data = [
+			'Sample 1',
+			'Sample 2',
+			'Sample 3'
+		];
+
+		echo json_encode(array('data'=>$data));
+	}
 	public function getDataTable() {
 		$line  = array();
 		$line2 = array();
@@ -52,11 +66,11 @@ class Laporan extends CI_Controller {
 			$row['jenkel'] = $value->Sex;
 			$row['tgl_lahir'] = $value->TglLahir;
 			$row['umur'] = $value->UmurThn;
-			$row['tgl_sampel'] = date("d-m-Y", strtotime($value->TglSampel));
-			$row['tanggal_periksa'] = date("d-m-Y", strtotime($value->Tanggal));
+			$row['tgl_sampel'] = $value->TglSampel ? date("d-m-Y", strtotime($value->TglSampel)) : '';
+			$row['tanggal_periksa'] = $value->Tanggal ? date("d-m-Y", strtotime($value->Tanggal)) : ''; 
 			$row['jenis_sampel'] = $value->AsalSampel;
 			$row['tindakan'] = $value->NMDetail;
-			$row['pengirim'] = $value->NmDoc;
+			$row['pengirim'] = $value->pemeriksa;
 			$row['telp'] = $value->phone;
 			$row['pengambil_sampel'] = $value->Pengambil_sampel;
 			$row['verifikator'] = $value->Verifikasi;

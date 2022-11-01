@@ -17,7 +17,8 @@ class Model_laporan extends CI_Model {
 		if ($fil_hasil!='') {
 			$this->sv->like('DH.hasil', $fil_hasil);
 		}
-		$this->sv->select('HH.*,HB.TglSampel,HB.Tanggal,HB.AsalSampel,HB.Pengambil_sampel,HB.Verifikasi,HB.Setujui,HB.Catatan, UI.NmUnit, pl.NMDetail, I.NmInstansi, CAST(R.Bod AS DATE) as TglLahir, R.phone, dok.NmDoc as pemeriksa, R.Catatan, R.nikktp ');
+		$this->sv->select("HH.*,HB.TglSampel,HB.Tanggal,HB.AsalSampel,HB.Pengambil_sampel,HB.Verifikasi,HB.Setujui,HB.Catatan, UI.NmUnit, pl.NMDetail, I.NmInstansi, CAST(R.Bod AS DATE) as TglLahir, R.phone, dok.NmDoc as pemeriksa, R.Catatan, R.nikktp,
+		CONCAT('','') as hasil ");
 		$stat = $this->sv->from('HasilPatologi as HH')
 				->join('HeadBilPatologi HB', 'HB.Notran= HH.Notran','left' )
 				->join('Register R', 'R.Regno= HH.Regno', 'left')

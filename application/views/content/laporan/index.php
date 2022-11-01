@@ -132,24 +132,31 @@
             $('#instansi').css("display", "none");
         }
 
+        var table = $('#kel_pemeriksaan2').DataTable({
+          paging: false,
+          ajax: {
+            "url": '<?php echo base_url('Laporan/getSampleData')?>',
+          }
+        });
+
         tabel = $('#kel_pemeriksaan').DataTable({
             dom : "fBi", 
-            "search": true,
-            "paging": false,
+            paging: false,
             ajax:{
-                "url": '<?php echo site_url('laporan/getDataTable')?>',
+                "url": '<?php echo base_url('laporan/getDataTable')?>',
                 "type": 'POST',
+                "cache": false,
                 "data": function ( d ) {
                     return $('#search_laporan').serialize();
                 },
                 beforeSend: function(){
-          // Here, manually add the loading message.
-          $('#kel_pemeriksaan > tbody').html(
-            '<tr class="odd">' +
-              '<td valign="top" colspan="19" class="dataTables_empty"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i> <span>Loading</span></td>' +
-            '</tr>'
-          );
-        },
+                  // Here, manually add the loading message.
+                  $('#kel_pemeriksaan > tbody').html(
+                    '<tr class="odd">' +
+                      '<td valign="top" colspan="19" class="dataTables_empty"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i> <span>Loading</span></td>' +
+                    '</tr>'
+                  );
+                },
             },
             columns: [
                 { data: "no" },
