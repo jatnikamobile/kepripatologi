@@ -177,7 +177,7 @@ class HasilPemeriksaan extends CI_Controller
 				'list' => $head,
 				'head' => $regno,
 				'hasil' => $hasil,
-				'regno' => $regno[0]->Regno
+				'regno' => $regno ? $regno[0]->Regno : '',
 			);
 			$this->load->view('content/hasil_pemeriksaan/table_hasil_pemeriksaan_pa', $parse);
 		}

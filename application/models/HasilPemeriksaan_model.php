@@ -25,7 +25,8 @@ class HasilPemeriksaan_model extends MY_Model {
 			->join("TblKategoriPsn kategori", "headbilling.Kategori = kategori.KdKategori", "LEFT")
 			->join('fGroupPatologi g', 'head.KdGroup = g.KDGroup', 'LEFT')
 			->join('fTarifPatologi h', 'h.KDDetail = head.KDDetail', 'LEFT')
-			->where('head.NoTran', $notran)->get()->row();
+			// ->where('head.NoTran', $notran)->get()->row();
+			->where('head.NoTran', $notran)->get()->result();
 		return $data;
 	}
 
