@@ -19,20 +19,11 @@
                         <i class="menu-icon fa fa-home"></i><span class="menu-text"> Beranda </span>
                     </a> <b class="arrow"></b>
                 </li>
-                <li class="hover <?=isset($main_menu) && $main_menu == 'list'? 'active':''?>">
-                    <a href="#" class="dropdown-toggle"><i class="menu-icon fa fa-bars"></i><span class="menu-text">List Pendaftaran</span><b class="arrow fa fa-angle-down"></b></a>
-                    <b class="arrow"></b>
-                    <ul class="submenu">
-                        <li class="hover <?=isset($sub1) && $sub1 == 'listpasien'? 'active':''?>">
-                            <a href="<?=base_url('list_pasien')?>"><i class="menu-icon fa fa-caret-right"></i>List Pasien</a>
-                            <b class="arrow"></b>
-                        </li>
-                        <li class="hover <?=isset($sub1) && $sub1 == 'listinstansi'? 'active':''?>">
-                            <a href="<?=base_url('list_pasien/instansi')?>"><i class="menu-icon fa fa-caret-right"></i> List Instansi</a>
-                            <b class="arrow"></b>
-                        </li>
-                    </ul>
-                </li>
+                <!-- <li class="hover <?=isset($main_menu) && $main_menu == 'listpasien'? 'active':''?>">
+                    <a href="<?=base_url('list_pasien')?>">
+                        <i class="menu-icon fa fa-bars"></i><span class="menu-text"> List Pasien </span>
+                    </a> <b class="arrow"></b>
+                </li> -->
                 <li class="hover <?=isset($main_menu) && $main_menu == 'laporan' ? 'active':''?>">
                     <a href="<?=base_url('laporan/index')?>">
                         <i class="menu-icon fa fa-leaf"></i><span class="menu-text"> Laporan </span>
@@ -47,30 +38,16 @@
                     <i class="menu-icon fa fa-home"></i><span class="menu-text"> Beranda </span>
                 </a> <b class="arrow"></b>
             </li>
-            <li class="hover <?=isset($main_menu) && $main_menu == 'registrasi'? 'active':''?>">
-                <a href="<?=base_url('registrasi/index')?>">
-                    <i class="menu-icon fa fa-list-ol"></i><span class="menu-text"> Registrasi Pasien </span>
+            <!-- <li class="hover <?=isset($main_menu) && $main_menu == 'listpasien'? 'active':''?>">
+                <a href="<?=base_url('list_pasien')?>">
+                    <i class="menu-icon fa fa-bars"></i><span class="menu-text"> List Pasien </span>
                 </a> <b class="arrow"></b>
-            </li>
-            <li class="hover <?=isset($main_menu) && $main_menu == 'list'? 'active':''?>">
-                <a href="#" class="dropdown-toggle"><i class="menu-icon fa fa-bars"></i><span class="menu-text">List Pendaftaran</span><b class="arrow fa fa-angle-down"></b></a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="hover <?=isset($sub1) && $sub1 == 'listpasien'? 'active':''?>">
-                        <a href="<?=base_url('list_pasien')?>"><i class="menu-icon fa fa-caret-right"></i>List Pasien</a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="hover <?=isset($sub1) && $sub1 == 'listinstansi'? 'active':''?>">
-                        <a href="<?=base_url('list_pasien/instansi')?>"><i class="menu-icon fa fa-caret-right"></i> List Instansi</a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
-            <li class="hover <?=isset($main_menu) && $main_menu == 'listorder'? 'active':''?>">
+            </li> -->
+<!--             <li class="hover <?=isset($main_menu) && $main_menu == 'listorder'? 'active':''?>">
                 <a href="<?=base_url('list_order')?>">
                     <i class="menu-icon fa fa-list"></i><span class="menu-text"> List Order </span>
                 </a> <b class="arrow"></b>
-            </li>
+            </li> -->
             <li class="hover <?=isset($main_menu) && $main_menu == 'billinglab'? 'active':''?>">
                 <a href="#" class="dropdown-toggle"><i class="menu-icon fa fa-bookmark"></i><span class="menu-text">Billing Patologi Anatomi</span><b class="arrow fa fa-angle-down"></b></a>
                 <b class="arrow"></b>
@@ -108,21 +85,7 @@
                             <i class="menu-icon fa fa-caret-right"></i>Master Tarif
                         </a> <b class="arrow"></b>
                     </li>
-                    <li class="hover <?=isset($sub1) && $sub1 == 'masterinstansi' ? 'active':''?>">
-                        <a href="<?=base_url('masterinstansi/index')?>"><i class="menu-icon fa fa-caret-right"></i>Master Instansi
-                        </a> <b class="arrow"></b>
-                    </li>
-                    <li class="hover <?=isset($sub1) && $sub1 == 'masternegara' ? 'active':''?>">
-                        <a href="<?=base_url('masternegara/index')?>"><i class="menu-icon fa fa-caret-right"></i>Master Negara
-                        </a> <b class="arrow"></b>
-                    </li>
                 </ul>
-            </li>
-            
-            <li class="hover <?=isset($main_menu) && $main_menu == 'nilainormal' ? 'active':''?>">
-                <a href="<?=base_url('mastertarif/index')?>">
-                    <i class="menu-icon fa fa-leaf"></i><span class="menu-text"> Nilai Normal </span>
-                </a> <b class="arrow"></b>
             </li>
             
             <li class="hover <?=isset($main_menu) && $main_menu == 'laporan' ? 'active':''?>">
@@ -160,25 +123,11 @@
                     <i class="menu-icon fa fa-home"></i><span class="menu-text"> Beranda </span>
                 </a> <b class="arrow"></b>
             </li>
-            <li class="hover <?=isset($main_menu) && $main_menu == 'registrasi'? 'active':''?>">
-                <a href="<?=base_url('registrasi/index')?>">
-                    <i class="menu-icon fa fa-list-ol"></i><span class="menu-text"> Registrasi Pasien </span>
+            <!-- <li class="hover <?=isset($main_menu) && $main_menu == 'listpasien'? 'active':''?>">
+                <a href="<?=base_url('list_pasien')?>">
+                    <i class="menu-icon fa fa-bars"></i><span class="menu-text"> List Pasien </span>
                 </a> <b class="arrow"></b>
-            </li>
-            <li class="hover <?=isset($main_menu) && $main_menu == 'list'? 'active':''?>">
-                <a href="#" class="dropdown-toggle"><i class="menu-icon fa fa-bars"></i><span class="menu-text">List Pendaftaran</span><b class="arrow fa fa-angle-down"></b></a>
-                <b class="arrow"></b>
-                <ul class="submenu">
-                    <li class="hover <?=isset($sub1) && $sub1 == 'listpasien'? 'active':''?>">
-                        <a href="<?=base_url('list_pasien')?>"><i class="menu-icon fa fa-caret-right"></i>List Pasien</a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="hover <?=isset($sub1) && $sub1 == 'listinstansi'? 'active':''?>">
-                        <a href="<?=base_url('list_pasien/instansi')?>"><i class="menu-icon fa fa-caret-right"></i> List Instansi</a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
+            </li> -->
             <li class="hover <?=isset($main_menu) && $main_menu == 'listorder'? 'active':''?>">
                 <a href="<?=base_url('list_order')?>">
                     <i class="menu-icon fa fa-list"></i><span class="menu-text"> List Order </span>

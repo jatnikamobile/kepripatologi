@@ -278,7 +278,10 @@ class BillingPemeriksaan_model extends MY_Model {
 			])
 			->get()->row_array();
 
-		$doc = $this->sv->select(['KdDoc', 'NmDoc'])->where('KdDoc', $dok_pengirim)->get('FtDokter')->row_array() ?? [];
+		$doc = $this->sv->select(['KdDoc', 'NmDoc'])->where('KdDoc', $dok_pengirim)->get('FtDokter')->row_array() ?? []; 
+		if ($dok_pengirim == 'D010') {
+			$doc=['KdDoc'=>'PA','NmDoc'=>$dtx];
+		}
 
 		$usia = date_diff(date_create($tgl_transaksi), date_create($register['Bod']));
 		unset($register['Bod']);

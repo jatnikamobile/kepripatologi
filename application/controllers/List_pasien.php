@@ -30,7 +30,7 @@ class List_pasien extends MY_Controller
 
 		$parse = array(
 			'title' => 'List Pasien',
-			'main_menu' => 'list',
+			'main_menu' => 'listpasien',
 			'sub1' => 'listpasien',
 			'content' => 'content/list_pasien/list',
 			'page_list' => $result,
