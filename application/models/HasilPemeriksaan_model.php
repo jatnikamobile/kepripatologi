@@ -13,7 +13,7 @@ class HasilPemeriksaan_model extends MY_Model {
 
 	public function get_head_hasil_pemeriksaan($notran)
 	{
-		$data = $this->sv->select('head.*,register.nikktp as Nik, headbilling.TglSampel, headbilling.AsalSampel, headbilling.Verifikasi, headbilling.Setujui , register.Firstname, register.KdSex, register.KdTuju, register.KdCbayar, kategori.NmKategori, register.Bod, headbilling.KdDoc, headbilling.NmDoc, headbilling.KdBangsal, bangsal.NmBangsal, kelas.NMkelas, poli.NMPoli, dokter.NmDoc as dokterPemeriksa, master.Address, headbilling.TglSampel, headbilling.kewarganegaraan, headbilling.AsalSampel, g.NmGroup, h.Tarif')
+		$data = $this->sv->select('head.*,register.nikktp as Nik, headbilling.TglSampel, headbilling.AsalSampel, headbilling.Verifikasi, headbilling.Setujui , register.Firstname, register.KdSex, register.KdTuju, register.KdCbayar, kategori.NmKategori, register.Bod, headbilling.KdDoc, headbilling.NmDoc, headbilling.KdBangsal, bangsal.NmBangsal, kelas.NMkelas, poli.NMPoli, dokter.NmDoc as dokterPemeriksa, master.Address, headbilling.TglSampel, headbilling.kewarganegaraan, headbilling.AsalSampel, g.NmGroup, headbilling.Jumlah as Tarif')
 			->from('HasilPatologi head')
 			->join('Register register', 'head.Regno = register.Regno', 'INNER')
 			->join('MasterPS master', 'register.Medrec = master.Medrec', 'LEFT')
@@ -24,7 +24,6 @@ class HasilPemeriksaan_model extends MY_Model {
 			->join("FtDokter dokter", "headbilling.KdDokter = dokter.KdDoc", "LEFT")
 			->join("TblKategoriPsn kategori", "headbilling.Kategori = kategori.KdKategori", "LEFT")
 			->join('fGroupPatologi g', 'head.KdGroup = g.KDGroup', 'LEFT')
-			->join('fTarifPatologi h', 'h.KDDetail = head.KDDetail', 'LEFT')
 			// ->where('head.NoTran', $notran)->get()->row();
 			->where('head.NoTran', $notran)->get()->result();
 		return $data;
