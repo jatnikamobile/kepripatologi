@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> No. Registrasia </label>
+        <label class="col-sm-3 control-label no-padding-right"> No. Registrasi </label>
         <div class="col-sm-9">
           <div class="input-group">
             <input type="hidden" name="regno" value="<?= @$register->Regno ?>">
