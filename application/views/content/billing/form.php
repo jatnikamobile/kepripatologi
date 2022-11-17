@@ -26,6 +26,7 @@
               <button class="btn btn-sm btn-primary" type="button" id="btnCariRegistrasi">
                 <i class="ace-icon fa fa-search bigger-110"></i> Cari
               </button>
+              <button type="button" class="btn btn-sm btn-purple" id="btn_list_pasien" ><i class="fa fa"></i> List pasien</button>
             </span>
           </div>
         </div>
@@ -356,6 +357,30 @@
   </div><!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" id="modal_list_pasien" tabindex="-1" role="dialog" aria-labelledby="ModalGroupList">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ModalGroupList">List Pasien</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_list_pasien_modal">
+                    <p>Pilih list pasien:</p>
+                    <input type="radio" id="lpasien1" name="list_pasien" value="Rajal">
+                    <label for="lpasien1">Rawat Jalan</label>&nbsp;&nbsp;
+                    <input type="radio" id="lpasien2" name="list_pasien" value="IGD">
+                    <label for="lpasien2">IGD</label>&nbsp;&nbsp;
+                    <input type="radio" id="lpasien3" name="list_pasien" value="Ranap">
+                    <label for="lpasien3">Rawat Inap</label><br><br>    
+                    <input class="btn btn-round btn-sm btn-success"  type="submit" value="Submit">
+                </form>
+                <div style="padding-top:10px" id="target_list_pasien"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="list-tindakan-modal" class="modal fade" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -399,6 +424,30 @@
   $(function() {
     $('#btnListTransaksi').click(function() {
       $('#list-transaksi-modal').modal('show');
+    });
+    $('#btn_list_pasien').on('click',function(e){
+        $('#modal_list_pasien').modal('show'); 
+    });
+
+    $('#form_list_pasien_modal').submit(function(ev){
+        ev.preventDefault();
+        jQuery("input[name='list_pasien']").each(function() {
+           var value = this.value;
+           var checked = this.checked;
+            if ( checked == true ) {
+                var xhr = $.ajax({
+                    url:"<?=base_url('billingpemeriksaan/test')?>",
+                    type:'POST',
+                    data:{way:value},
+                    beforeSend:function(){
+                        $('#target_list_pasien').html('<div class="alert alert-info">Memuat Data <span style="text-align:right"><i class="fa fa-spinner fa-pulse"></i></span></div>');
+                    },
+                    success:function(resp){
+                        $('#target_list_pasien').html(resp);
+                    }
+                });
+            }
+        })
     });
 
     $('[name=jam_transaksi]').timepicker({

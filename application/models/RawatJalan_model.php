@@ -33,6 +33,10 @@ class RawatJalan_model extends CI_Model {
                      ->join("FtDokter", "Register.KdDoc = FtDokter.KdDoc", "INNER")
                      ->join("TblKategoriPsn", "Register.Kategori = TblKategoriPsn.KdKategori","LEFT");
         if($set != 'riwayat'){
+            
+            if($set == 'list-rj'){  $this->sv->where('Register.KdPoli !=','30'); }
+            elseif ($set == 'list-igd') { $this->sv->like('Register.KdPoli', '30'); }
+
             if ($regdate != '') { $this->sv->where("Register.Regdate", $regdate); }
             if ($kdpoli != '') { $this->sv->where('Register.KdPoli', $kdpoli); }
             if($medrec !='' && $nama != ''){
