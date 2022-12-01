@@ -26,6 +26,7 @@
               <button class="btn btn-sm btn-primary" type="button" id="btnCariRegistrasi">
                 <i class="ace-icon fa fa-search bigger-110"></i> Cari
               </button>
+              <button type="button" class="btn btn-sm btn-purple" id="btn_list_pasien" ><i class="fa fa"></i> List pasien</button>
             </span>
           </div>
         </div>
@@ -94,6 +95,12 @@
           </select>
         </div>
       </div>
+      <div class="form-group" id="dokter_pengirim_tx" hidden>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="dokter_pengirim" id="dokter_pengirim">
+        </div>
+      </div>
       <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> Pemeriksa </label>
         <div class="col-sm-9">
@@ -107,17 +114,7 @@
         </div>
       </div>
       <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> Pengambil Sampel </label>
-        <div class="col-sm-9">
-          <select class="form-control select2" name="ambil_sampel">
-            <?php if(isset($billing) && isset($billing->Kd_ambil_sampel) && isset($billing->Pengambil_sampel)): ?>
-            <option value="<?= $billing->Kd_ambil_sampel ?>" selected="selected"><?= $billing->Pengambil_sampel ?></option>
-            <?php endif; ?>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> No. Lab </label>
+        <label class="col-sm-3 control-label no-padding-right"> No. PA </label>
         <div class="col-sm-9">
           <input type="text" class="form-control" name="no_lab" readonly="readonly" value="<?= @$billing->NoLab ?>">
         </div>
@@ -126,13 +123,6 @@
         <label class="col-sm-3 control-label no-padding-right"> Tgl. Terima Sampel </label>
         <div class="col-sm-9">
             <input type="text" class="form-control" name="tgl_sampel" value="<?= isset($billing) && isset($register->Regdate) ? date('d/m/Y', strtotime($register->Regdate)) : date('d/m/Y') ?>">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> Jenis/Asal Sampel <?= $tindakan_order->KdPemeriksaan ?> </label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" name="jenis_sampel" 
-          value="<?= isset($billing) && isset($billing->AsalSampel) ? $billing->AsalSampel : (($tindakan_order->KdPemeriksaan == 13001 || $tindakan_order->KdPemeriksaan == 13002 ) ? 'Swab Nasofaring dan Orofaring' : 'Swab Nasofaring') ?>">
         </div>
       </div>
       <div class="form-group">
@@ -228,30 +218,6 @@
         <label class="col-sm-3 control-label no-padding-right"> Kategori </label>
         <div class="col-sm-9">
           <input type="text" class="form-control" name="kategori" readonly="readonly" value="<?= @$source->NmKategori ?>">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> Diverifikasi Oleh </label>
-        <div class="col-sm-9">
-          <select class="form-control select2" name="verif" id="verif" required>
-            <?php if(isset($billing) && isset($billing->Kd_verif) && isset($billing->Verifikasi)): ?>
-              <option value="<?= $billing->Kd_verif ?>" selected="selected"><?= $billing->Verifikasi ?></option>
-            <?php else: ?>
-              <option value="" selected="selected">-Pilih Data-</option>
-            <?php endif; ?>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label no-padding-right"> Disetujui Oleh </label>
-        <div class="col-sm-9">
-          <select class="form-control select2" name="setujui" id="setujui" required>
-            <?php if(isset($billing) && isset($billing->Kd_setujui) && isset($billing->Setujui)): ?>
-            <option value="<?= $billing->Kd_setujui ?>" selected="selected"><?= $billing->Setujui ?></option>
-            <?php else: ?>
-              <option value="" selected="selected">- Pilih Data -</option>
-            <?php endif; ?>
-          </select>
         </div>
       </div>
     </div>
@@ -392,6 +358,30 @@
   </div><!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade" id="modal_list_pasien" tabindex="-1" role="dialog" aria-labelledby="ModalGroupList">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="ModalGroupList">List Pasien</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_list_pasien_modal">
+                    <p>Pilih list pasien:</p>
+                    <input type="radio" id="lpasien1" name="list_pasien" value="Rajal">
+                    <label for="lpasien1">Rawat Jalan</label>&nbsp;&nbsp;
+                    <input type="radio" id="lpasien2" name="list_pasien" value="IGD">
+                    <label for="lpasien2">IGD</label>&nbsp;&nbsp;
+                    <input type="radio" id="lpasien3" name="list_pasien" value="Ranap">
+                    <label for="lpasien3">Rawat Inap</label><br><br>    
+                    <input class="btn btn-round btn-sm btn-success"  type="submit" value="Submit">
+                </form>
+                <div style="padding-top:10px" id="target_list_pasien"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="list-tindakan-modal" class="modal fade" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -436,6 +426,30 @@
     $('#btnListTransaksi').click(function() {
       $('#list-transaksi-modal').modal('show');
     });
+    $('#btn_list_pasien').on('click',function(e){
+        $('#modal_list_pasien').modal('show'); 
+    });
+
+    $('#form_list_pasien_modal').submit(function(ev){
+        ev.preventDefault();
+        jQuery("input[name='list_pasien']").each(function() {
+           var value = this.value;
+           var checked = this.checked;
+            if ( checked == true ) {
+                var xhr = $.ajax({
+                    url:"<?=base_url('billingpemeriksaan/test')?>",
+                    type:'POST',
+                    data:{way:value},
+                    beforeSend:function(){
+                        $('#target_list_pasien').html('<div class="alert alert-info">Memuat Data <span style="text-align:right"><i class="fa fa-spinner fa-pulse"></i></span></div>');
+                    },
+                    success:function(resp){
+                        $('#target_list_pasien').html(resp);
+                    }
+                });
+            }
+        })
+    });
 
     $('[name=jam_transaksi]').timepicker({
       minuteStep: 1,
@@ -457,7 +471,7 @@
       todayHighlight: true,
     });
 
-    $('[name=dok_pemeriksa],[name=ambil_sampel],[name=setujui],[name=verif], [name=dok_pengirim]').select2({
+    $('[name=dok_pemeriksa], [name=dok_pengirim]').select2({
       ajax: {
         url: '<?= site_url('ajax/dokter') ?>',
         processResults: function(data, params) {
@@ -770,13 +784,13 @@
     $('#btnSimpan').click(function() {
 
       var dok_pengirim = document.getElementById('dok_pengirim').validity.valid;
+      var tx_pengirim = document.getElementById('dokter_pengirim').value;
       var dok_pemeriksa = document.getElementById('dok_pemeriksa').validity.valid;
-      var verif = document.getElementById('verif').validity.valid;
-      var setujui = document.getElementById('setujui').validity.valid;
+      var dok_tx = tx_pengirim || '' ;
       if (!dok_pengirim) { alert('Isi Dokter Pengirim'); return; }
       if (!dok_pemeriksa) { alert('Isi Dokter Pemeriksa'); return; }
-      if (!verif) { alert('Isi Data Verif'); return; }
-      if (!setujui) { alert('Isi Penyetuju'); return; }
+      // if (!tx_pengirim) { dok_tx = tx_pengirim}
+
 
       let btn = $(this);
       let loadingText = '<i class="fa fa-spin fa-spinner"></i> Simpan / Konfirmasi';
@@ -794,10 +808,8 @@
           no_tran: $('[name=no_tran]').val(),
           regno: $('[name=regno]').val(),
           dok_pengirim: $('[name=dok_pengirim]').val(),
+          dtx: dok_tx,
           dok_pemeriksa: $('[name=dok_pemeriksa]').val(),
-          Kd_ambil_sampel: $('[name=ambil_sampel]').val(),
-          verif: $('[name=verif]').val(),
-          setujui: $('[name=setujui]').val(),
           jenis_sampel: $('[name=jenis_sampel]').val(),
           tgl_sampel: $('[name=tgl_sampel]').val(),
           tgl_selesai: $('[name=tgl_selesai]').val(),
@@ -925,6 +937,17 @@
       });
     });
   });
+
+  $('[name=dok_pengirim]').on('change', function() {
+      let dok = $(this).val();
+      if(dok == 'D010') {
+        $('#dokter_pengirim_tx').show();
+      }else{
+        $('#dokter_pengirim_tx').hide();
+      }
+    })
+    .trigger('change');
+
   function ubahdiskon(){
       var pil = $('#tipe_diskon').val();
       var diskon = $('#jumlah_diskon').val();

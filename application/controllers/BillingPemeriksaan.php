@@ -193,4 +193,24 @@ class BillingPemeriksaan extends CI_Controller {
 	    	->set_content_type('json')
 	    	->set_output(json_encode($post));	
 	}
+
+	public function test(){
+		$way = $this->input->post('way');
+		
+		$parse = [
+			'way' => $way,
+		];
+
+		if($way == 'Rajal'){
+
+			$this->load->view('content/list_pasien/rajal', $parse);
+
+		} elseif($way == 'Ranap') {
+			$this->load->view('content/list_pasien/ranap', $parse);
+
+		} elseif($way == 'IGD') {
+			$this->load->view('content/list_pasien/igd', $parse);
+
+		}
+	}
 }

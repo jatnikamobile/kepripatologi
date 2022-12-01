@@ -4,7 +4,7 @@
       <p><i><u>Data Pasien</u></i></p>
       <div class="col-sm-12">
         <div class="form-group">
-          <label class="col-sm-3 control-label no-padding-right">No Transaksi</label>
+          <label class="col-sm-3 control-label no-padding-right">No Transaksia</label>
           <div class="input-group col-sm-6">
             <span class="input-group-addon" id="" style="border:none;background-color:transparent;">:</span>
             <input type="text" name="NoTran" id="NoTran" class="form-control input-sm col-xs-10 col-sm-5" readonly/>

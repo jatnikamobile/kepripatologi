@@ -106,7 +106,7 @@
                 <td width="5%"></td>
                 <td>Ruang / Poli</td>
                 <td>:</td>
-                <td><?= $head->NmBangsal ? $head->NmBangsal : $head->NmPoli ?></td>
+                <td><?= $head->NmBangsal ? $head->NmBangsal : $head->NMPoli ?></td>
               </tr>
               <tr>
                 <td width="5%"></td>

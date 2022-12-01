@@ -108,17 +108,9 @@ class HasilPemeriksaan extends CI_Controller
 	         <a href="'.base_url('hasilpemeriksaan/print_hasil_pemeriksaan?notransaksi='.$value->NoTran).'" title="Print Hasil Pemeriksaan" target="_blank">
 	          <i class="fa fa-print blue"></i>
 	        </a>
-	        <a href="'.base_url('billingpemeriksaan/print_label_billing?notransaksi='.$value->NoTran).'" target="_blank" title="Print Label">
-	          <i class="fa fa-print orange"></i>
-	        </a>
-	        <a href="'.base_url('billingpemeriksaan/print_rincian_biaya_billing_pemeriksaan?notransaksi='.$value->NoTran.'').'" target="_blank" title="Print Rincian Biaya Billing Pemeriksaan">
-	          <i class="fa fa-print yellow"></i>
-	        </a>
+	        
 	        <a href="'.base_url('hasilpemeriksaan/print_bukti_pengambilan?notransaksi='.$value->NoTran).'" target="_blank" title="Print Bukti Pengambilan Hasil Laboratorium">
 	          <i class="fa fa-print purple"></i>
-	        </a>
-	        <a href="'.base_url('hasilpemeriksaan/print_hasil_pemeriksaan_micro?notransaksi='.$value->NoTran).'" title="Print Hasil Pemeriksaan" target="_blank">
-	          <i class="fa fa-print green"></i>
 	        </a>
             '
             ;
@@ -128,6 +120,13 @@ class HasilPemeriksaan extends CI_Controller
         $line['data'] = $line2;            
         echo json_encode($line);
 	}
+
+	// <a href="'.base_url('billingpemeriksaan/print_label_billing?notransaksi='.$value->NoTran).'" target="_blank" title="Print Label">
+	//           <i class="fa fa-print orange"></i>
+	//         </a>
+	//         <a href="'.base_url('billingpemeriksaan/print_rincian_biaya_billing_pemeriksaan?notransaksi='.$value->NoTran.'').'" target="_blank" title="Print Rincian Biaya Billing Pemeriksaan">
+	//           <i class="fa fa-print yellow"></i>
+	//         </a>
 
 	public function list__table_part()
 	{
@@ -160,7 +159,7 @@ class HasilPemeriksaan extends CI_Controller
 		$head = $this->hpm->get_head_hasil_pemeriksaan($param);
 		$this->output
 	    	->set_content_type('json')
-	    	->set_output(json_encode($head));
+	    	->set_output(json_encode($head[0]));
 	}
 
 	public function get_pasien_by_notran_table_detail()
@@ -177,7 +176,7 @@ class HasilPemeriksaan extends CI_Controller
 				'list' => $head,
 				'head' => $regno,
 				'hasil' => $hasil,
-				'regno' => $regno[0]->Regno
+				'regno' => $regno ? $regno[0]->Regno : '',
 			);
 			$this->load->view('content/hasil_pemeriksaan/table_hasil_pemeriksaan_pa', $parse);
 		}
