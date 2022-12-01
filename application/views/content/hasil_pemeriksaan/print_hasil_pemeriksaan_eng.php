@@ -183,7 +183,7 @@
               <tr>
                 <td style="padding-top: 90px; text-align: center; width: 30%; display: none;"></td>
                 <td></td>
-                <td style="text-align: center; width: 40%;">Jakarta, <?= $tgl_ttd ?> <br> Physician, <br><br>
+                <td style="text-align: center; width: 40%;">Tanjung Pinang, <?= $tgl_ttd ?> <br> Physician, <br><br>
                   <img src="<?php echo site_url('assets/qr/'.$qr) ?>" width="110px" height='110px' alt="">
                 </td>
               </tr>
