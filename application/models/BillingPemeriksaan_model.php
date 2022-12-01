@@ -82,6 +82,7 @@ class BillingPemeriksaan_model extends MY_Model {
 				'd.NmTarif',
 				'd.Sarana',
 				'd.Pelayanan',
+				'd.Qty',
 				'd.JumlahBiaya',
 				'FtDokter.NmDoc'
 			])
@@ -533,6 +534,7 @@ class BillingPemeriksaan_model extends MY_Model {
 				'd.NmTarif',
 				'd.Sarana',
 				'd.Pelayanan',
+				'd.Qty',
 				'd.JumlahBiaya',
 			])
 			->from('DetailBilPatologi AS d')
@@ -542,8 +544,8 @@ class BillingPemeriksaan_model extends MY_Model {
 
 		return $success ? [
 			'list_detail' => $list_detail,
-			'FormattedJumlahBiaya' => number_format($new_total, 0, ',', '.'),
-		] : FALSEs;
+			'FormattedJumlahBiaya' => number_format($new_total, 0, ',', '.')
+		] : FALSE;
 	}
 
 	public function get_billing_by_notran($no_tran)
@@ -1476,6 +1478,7 @@ class BillingPemeriksaan_model extends MY_Model {
 				'd.NmTarif',
 				'd.Sarana',
 				'd.Pelayanan',
+				'd.Qty',
 				'd.JumlahBiaya',
 				'FtDokter.NmDoc'
 			])
@@ -1485,4 +1488,41 @@ class BillingPemeriksaan_model extends MY_Model {
 			->get()->result();
 		return $billing;
 	}
+
+	/* ocha */
+	public function update_qty_transaksi($regno='', $notran='', $kdtarif='', $qty=''){
+		$this->sv->update('DetailBilPatologi', array('Qty'=>$qty), array('Regno'=>$regno, 'NoTran'=>$notran, 'KdTarif'=>$kdtarif));
+
+		$det = $this->sv->select('(Sarana+Pelayanan) * Qty as total')
+						->get_where('DetailBilPatologi', array('Regno'=>$regno, 'NoTran'=>$notran, 'KdTarif'=>$kdtarif))->row();
+		
+		$sql = "WITH temp AS
+				(SELECT CASE WHEN Qty IS NULL THEN (Sarana+Pelayanan)*1
+										WHEN Qty = '' THEN (Sarana+Pelayanan)*1
+										ELSE (Sarana+Pelayanan)*Qty
+										END 'total'
+				FROM DetailBilPatologi
+				WHERE NoTran = '$notran')
+				
+				SELECT SUM(total) as total FROM temp";
+		$all = $this->sv->query($sql)->row();
+
+		$head = $this->sv->get_where('HeadBilPatologi', array('NoTran'=>$notran))->row();
+		$dataHead = array(
+			'Jumlah' => $all->total,
+			'TotalBiaya' => $all->total - $head->Diskon 
+		);
+		$this->sv->update('HeadBilPatologi', $dataHead, array('NoTran'=>$notran));
+
+		$output = array(
+			'item_detail' => 'Rp. '.number_format($det->total, 0, ',', '.'),
+			'curr_total' => 'Rp. '.number_format($all->total, 0, ',', '.'),
+			'num_item_detail' => $det->total,
+			'num_curr_total' => $all->total,
+			'curr_total_biaya' => 'Rp. '.number_format($all->total - $head->Diskon, 0, ',','.')
+		);
+
+		return $output;
+	}
+	/* ---- */
 }

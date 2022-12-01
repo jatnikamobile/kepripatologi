@@ -162,4 +162,17 @@ class Billing extends MY_Controller
 	{
 
 	}
+
+	/* ocha */
+	public function update_qty(){
+		$regno = $this->input->get('regno');
+		$notran = $this->input->get('notran');
+		$kdtarif = $this->input->get('kdtarif');
+		$qty = $this->input->get('qty');
+
+		$output = $this->bpm->update_qty_transaksi($regno, $notran, $kdtarif, $qty);
+
+		echo json_encode($output);
+	}
+	/* ---- */
 }

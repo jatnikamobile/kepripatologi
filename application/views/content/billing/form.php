@@ -300,6 +300,7 @@
           <th>Pemeriksaan</th>
           <th style="width: 150px;">Sarana</th>
           <th style="width: 150px;">Pelayanan</th>
+          <th style="width: 100px;">Qty</th>
           <th style="width: 150px;">Biaya</th>
           <th style="width: 50px;">#</th>
         </tr>
@@ -653,7 +654,8 @@
 
     function addTindakan(noTran, kodeTindakan, kodeInput) {
 
-      let last_nomor = $('#detail-billing tbody tr:last-child').data('nomor');
+      //let last_nomor = $('#detail-billing tbody tr:last-child').data('nomor');
+      let last_nomor = $('#detail-billing tbody tr').last().data('nomor');
       return $.ajax({
         method: 'POST',
         url: '<?= site_url('ajax/tambah_tindakan') ?>',
@@ -680,6 +682,7 @@
             }
 
             $('[name=jumlah_biaya]').val('Rp. ' + res.result.FormattedJumlahBiaya);
+            $('[name=total_biaya]').val('Rp. '+res.result.FormattedJumlahBiaya); //ocha temp
           }
         },
         complete: function() {
@@ -911,6 +914,7 @@
               if(res && res.success) {
                 btn.parents('tr').remove();
                 $('[name=jumlah_biaya]').val('Rp. ' + res.formatted_total);
+                $('[name=total_biaya]').val('Rp. ' + res.formatted_total); //ocha temp
               }
             },
             complete: function() {
