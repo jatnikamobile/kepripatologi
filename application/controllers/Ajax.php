@@ -145,6 +145,7 @@ class Ajax extends MY_Controller
 			->string('dtx')
 			->string('jenis_sampel')
 			->string('kwn')
+			->string('cara_bayar')
 			->date('tgl_sampel', ['d/m/Y', 'Y-m-d'])
 			->date('tgl_selesai', ['d/m/Y', 'Y-m-d'], FALSE)
 			->date('jam_selesai', 'H:i:s', FALSE)
@@ -221,5 +222,13 @@ class Ajax extends MY_Controller
 		$this->output
 			->set_content_type('application/json')
 			->set_output(json_encode($output));
+	}
+
+	public function cara_bayar(){
+		$this->load->model('BillingPemeriksaan_model', 'bpm');
+		$result = $this->bpm->list_cara_bayar();
+		$this->output
+			->set_content_type('application/json')
+			->set_output(json_encode($result));
 	}
 }

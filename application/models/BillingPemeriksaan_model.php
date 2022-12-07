@@ -32,7 +32,8 @@ class BillingPemeriksaan_model extends MY_Model {
 				'h.UmurThn',
 				'h.UmurBln',
 				'h.UmurHari',
-				'r.KdCBayar', 'cb.NMCbayar',
+				//'r.KdCBayar', 'cb.NMCbayar',
+				'h.KdCBayar', 'cb.NMCbayar',
 				'h.KdJaminan', 'jm.NMJaminan',
 				'h.KdPoli', 'pl.NMPoli',
 				'h.KdBangsal', 'bl.NmBangsal',
@@ -44,7 +45,8 @@ class BillingPemeriksaan_model extends MY_Model {
 			])
 			->from('HeadBilPatologi AS h')
 			->join('Register AS r', 'r.Regno=h.Regno', 'LEFT')
-			->join('TBLcarabayar AS cb', 'r.KdCBayar=cb.KdCBayar', 'LEFT')
+			//->join('TBLcarabayar AS cb', 'r.KdCBayar=cb.KdCBayar', 'LEFT')
+			->join('TBLcarabayar AS cb', 'h.KdCbayar=cb.KdCBayar', 'LEFT')
 			->join('TBLJaminan AS jm', 'h.KdJaminan=jm.KdJaminan', 'LEFT')
 			->join('POLItpp AS pl', 'h.KdPoli=pl.KdPoli', 'LEFT')
 			->join('TBLBangsal AS bl', 'h.KdBangsal=bl.KdBangsal', 'LEFT')
@@ -302,8 +304,10 @@ class BillingPemeriksaan_model extends MY_Model {
 			'nStatus'    => $status,
 			'nJenis'     => $jenis_pemeriksaan,
 			'KdDokter'   => $dok_pemeriksa,
+			'KdCbayar'	 => $cara_bayar,
 			'Tanda'      => 0,
 		]);
+		//print_r($properties); exit();
 
 		$this->sv->trans_start();
 
@@ -393,6 +397,7 @@ class BillingPemeriksaan_model extends MY_Model {
 					'nJenis'     => $jenis_pemeriksaan,
 					'KdDokter'   => $dok_pemeriksa,
 					'Tanda'      => 0,
+					'KdCbayar' 	 => $cara_bayar
 				]);
 				$this->sv->insert('HeadBilPatologi',$dataTemp);
 			}
@@ -1526,6 +1531,10 @@ class BillingPemeriksaan_model extends MY_Model {
 		);
 
 		return $output;
+	}
+
+	public function list_cara_bayar(){
+		return $this->sv->get('TBLcarabayar')->result();
 	}
 	/* ---- */
 }

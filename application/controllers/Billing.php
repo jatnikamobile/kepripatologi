@@ -57,6 +57,7 @@ class Billing extends MY_Controller
 		$register = $this->bpm->get_billing_pasien_by_regno($regno);
 
 		$list_group_tindakan = $this->bpm->get_group_pemeriksaan();
+		$list_cara_bayar = $this->bpm->list_cara_bayar();
 		$tindakan_order = (object)array("KdPemeriksaan"=>'');
 		$parse = array (
 			'title'	         => 'Billing Pemeriksaan',
@@ -65,6 +66,7 @@ class Billing extends MY_Controller
             'register'       => $register,
 			'tindakan_order' => $tindakan_order,
             'group_tindakan' => $list_group_tindakan,
+			'cara_bayar'	 => $list_cara_bayar
 		);
 
 		$this->load->view('layouts/wrapper', $parse);
@@ -74,6 +76,7 @@ class Billing extends MY_Controller
 	{
 		$billing = $this->bpm->get_billing_pasien_by_no_trans($no_trans);
 		$tindakan_order = $this->bpm->get_tindakan_order_pasien($no_trans);
+		$list_cara_bayar = $this->bpm->list_cara_bayar();
 	if(empty($tindakan_order)){
 		$tindakan_order = (object)array("KdPemeriksaan"=>'');
 	}// $tindakan_order = (object)array("KdPemeriksaan"=>'');
@@ -94,6 +97,7 @@ class Billing extends MY_Controller
             'billing'        => $billing,
             'tindakan_order' => $tindakan_order,
             'group_tindakan' => $list_group_tindakan,
+			'cara_bayar' 	 => $list_cara_bayar
 		);
 
 		$this->load->view('layouts/wrapper', $parse);

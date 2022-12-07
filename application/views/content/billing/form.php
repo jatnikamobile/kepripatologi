@@ -116,7 +116,7 @@
       <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> No. PA </label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" name="no_lab" readonly="readonly" value="<?= @$billing->NoLab ?>">
+          <input type="text" class="form-control" name="no_lab" value="<?= @$billing->NoLab ?>">
         </div>
       </div>
       <div class="form-group">
@@ -155,6 +155,7 @@
           </div>
         </div>
       </div>
+      <!--
       <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> J. Pemeriksaan </label>
         <div class="col-sm-9">
@@ -178,6 +179,7 @@
           </div>
         </div>
       </div>
+      -->
     </div>
   </div>
   <div class="col-md-4">
@@ -205,7 +207,19 @@
       <div class="form-group">
         <label class="col-sm-3 control-label no-padding-right"> Cara Bayar </label>
         <div class="col-sm-9">
+          <!--
           <input type="text" class="form-control" name="cara_bayar" readonly="readonly" value="<?= @$source->NMCbayar ?>">
+          -->
+          <select class="form-control" name="cara_bayar" data-value="<?= @$source->KdCbayar?>">
+              <option value="">-- Pilih --</option>
+              <?php
+                if(@$cara_bayar){
+                  foreach($cara_bayar as $dt){
+                    echo '<option value="'.$dt->KDCbayar.'" '.(@$source->KdCBayar == $dt->KDCbayar ? 'selected' : '').'>'.$dt->NMCbayar.'</option>';
+                  }
+                }
+              ?>
+          </select>
         </div>
       </div>
       <div class="form-group">
@@ -470,6 +484,8 @@
       endDate: '0d',
       todayHighlight: true,
     });
+
+    $('[name=cara_bayar]').select2();
 
     $('[name=dok_pemeriksa], [name=dok_pengirim]').select2({
       ajax: {
@@ -818,6 +834,7 @@
           jam_transaksi: $('[name=jam_transaksi]').val(),
           status: $('[name=status]:checked').val(),
           kwn: $('#kwn').val(),
+          cara_bayar: $('[name=cara_bayar]').val(),
           jenis_pemeriksaan: $('[name=jenis_pemeriksaan]:checked').val(),
         },
         retryCount: 3,
