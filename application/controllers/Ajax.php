@@ -146,6 +146,7 @@ class Ajax extends MY_Controller
 			->string('jenis_sampel')
 			->string('kwn')
 			->string('cara_bayar')
+			->string('no_lab')
 			->date('tgl_sampel', ['d/m/Y', 'Y-m-d'])
 			->date('tgl_selesai', ['d/m/Y', 'Y-m-d'], FALSE)
 			->date('jam_selesai', 'H:i:s', FALSE)

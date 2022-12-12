@@ -305,6 +305,7 @@ class BillingPemeriksaan_model extends MY_Model {
 			'nJenis'     => $jenis_pemeriksaan,
 			'KdDokter'   => $dok_pemeriksa,
 			'KdCbayar'	 => $cara_bayar,
+			'NoLab'		 => $no_lab,
 			'Tanda'      => 0,
 		]);
 		//print_r($properties); exit();

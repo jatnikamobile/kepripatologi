@@ -49,7 +49,7 @@
         <img src="<?php echo site_url('assets/images/kopsurat_keprii.png') ?>" height='110px' alt="">
       </td>
     </tr> 
-  </table><center> <b style="font-size:22px;">PATALOGI ANATOMI</b></center><br><br>
+  </table><center> <b style="font-size:22px;">PATALOGI ANATOMIK</b></center><br><br>
     
   <div class="main-content">
     <div class="main-content-inner">
@@ -72,7 +72,7 @@
                 <td width="5%"></td>
                 <td>No. PA</td>
                 <td>:</td>
-                <td><?= $head->NoTran ?></td>
+                <td><?= $head->NoLab //$head->NoTran ?></td>
                 <td width="5%"></td>
                 <td width="20%">Tanggal Diterima</td>
                 <td width="5%">:</td>

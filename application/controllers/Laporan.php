@@ -124,7 +124,7 @@ class Laporan extends CI_Controller {
  		$nmdoc = isset($fdokter) ? $fdokter->NmDoc : '-';
  		$korps = isset($fdokter) ? $fdokter->korps_ttd : '-';
         $image_name=$lab.'.png'; //buat name dari qr code sesuai dengan nim
- 		$dataqr="RSAU, PATOLOGIANATOMI,Dokter:".$nmdoc.",".$korps.",".$head[0]->Firstname.",".$head[0]->MedRec.",".$head[0]->Sex.",".$date."";
+ 		$dataqr="RSAU, PATOLOGI ANATOMI,Dokter:".$nmdoc.",".$korps.",".$head[0]->Firstname.",".$head[0]->MedRec.",".$head[0]->Sex.",".$date."";
         $params['data'] = $dataqr; //data yang akan di jadikan QR CODE
         $params['level'] = 'H'; //H=High
         $params['size'] = 10;

@@ -835,6 +835,7 @@
           status: $('[name=status]:checked').val(),
           kwn: $('#kwn').val(),
           cara_bayar: $('[name=cara_bayar]').val(),
+          no_lab: $('[name=no_lab]').val(),
           jenis_pemeriksaan: $('[name=jenis_pemeriksaan]:checked').val(),
         },
         retryCount: 3,

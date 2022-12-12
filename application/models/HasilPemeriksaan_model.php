@@ -13,7 +13,7 @@ class HasilPemeriksaan_model extends MY_Model {
 
 	public function get_head_hasil_pemeriksaan($notran)
 	{
-		$data = $this->sv->select('head.*,register.nikktp as Nik, headbilling.TglSampel, headbilling.AsalSampel, headbilling.Verifikasi, headbilling.Setujui , register.Firstname, register.KdSex, register.KdTuju, register.KdCbayar, kategori.NmKategori, register.Bod, headbilling.KdDoc, headbilling.NmDoc, headbilling.KdBangsal, bangsal.NmBangsal, kelas.NMkelas, poli.NMPoli, dokter.NmDoc as dokterPemeriksa, master.Address, headbilling.TglSampel, headbilling.kewarganegaraan, headbilling.AsalSampel, g.NmGroup, headbilling.Jumlah as Tarif')
+		$data = $this->sv->select('head.*,register.nikktp as Nik, headbilling.TglSampel, headbilling.AsalSampel, headbilling.Verifikasi, headbilling.Setujui , register.Firstname, register.KdSex, register.KdTuju, register.KdCbayar, kategori.NmKategori, register.Bod, headbilling.KdDoc, headbilling.NmDoc, headbilling.KdBangsal, bangsal.NmBangsal, kelas.NMkelas, poli.NMPoli, dokter.NmDoc as dokterPemeriksa, master.Address, headbilling.TglSampel, headbilling.kewarganegaraan, headbilling.AsalSampel, g.NmGroup, headbilling.Jumlah as Tarif, headbilling.NoLab')
 			->from('HasilPatologi head')
 			->join('Register register', 'head.Regno = register.Regno', 'INNER')
 			->join('MasterPS master', 'register.Medrec = master.Medrec', 'LEFT')
