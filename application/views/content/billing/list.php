@@ -49,6 +49,7 @@
               <th>Kelas</th>
               <th>Jumlah Biaya</th>
               <th>Alamat / Catatan</th>
+              <th>Status</th>
               <th style="width: 100px;">#</th>
             </tr>
           </thead>

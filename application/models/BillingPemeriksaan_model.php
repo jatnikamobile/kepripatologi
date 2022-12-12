@@ -670,10 +670,11 @@ class BillingPemeriksaan_model extends MY_Model {
 			'LEFT JOIN TblKategoriPsn AS kategori ON head.Kategori = kategori.KdKategori',
 			'LEFT JOIN TBLUnitInstansi AS uns ON reg.unitInstansi = uns.KdUnit',
 			'LEFT JOIN TBLInstansi AS ins ON uns.KdInstansi = ins.KdInstansi',
-			'LEFT JOIN KasirIrj AS krj ON krj.Regno = head.Regno',
+			'LEFT JOIN DetailKasirIrj as dkrj ON dkrj.NoFile = head.NoTran',
+			'LEFT JOIN KasirIrj AS krj ON krj.NoTran = dkrj.NoTran',
 			'LEFT JOIN PembayaranLayananLainnya AS lain ON lain.Nama = head.Firstname',
 			'LEFT JOIN Register_instansi AS rins ON rins.No_register = reg.regno_instansi',
-			'where head.KdPoli =38'
+			//'where head.KdPoli =38'
 		];
 
 		$where = $this->db->compile_binds('CAST(Tanggal AS DATE) BETWEEN ? AND ?', [$from_date->format('Y-m-d'), $to_date->format('Y-m-d')]);
