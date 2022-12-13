@@ -49,11 +49,11 @@
                 </a> <b class="arrow"></b>
             </li> -->
             <li class="hover <?=isset($main_menu) && $main_menu == 'billinglab'? 'active':''?>">
-                <a href="#" class="dropdown-toggle"><i class="menu-icon fa fa-bookmark"></i><span class="menu-text">Billing Patologi Anatomi</span><b class="arrow fa fa-angle-down"></b></a>
+                <a href="#" class="dropdown-toggle"><i class="menu-icon fa fa-bookmark"></i><span class="menu-text">Billing Patologi Anatomik</span><b class="arrow fa fa-angle-down"></b></a>
                 <b class="arrow"></b>
                 <ul class="submenu">
                     <li class="hover <?=isset($sub1) && $sub1 == 'sub-billinglab'? 'active':''?>">
-                        <a href="<?=base_url('billing/baru')?>"><i class="menu-icon fa fa-caret-right"></i> Billing Patologi Anatomi</a>
+                        <a href="<?=base_url('billing/baru')?>"><i class="menu-icon fa fa-caret-right"></i> Billing Patologi Anatomik</a>
                         <b class="arrow"></b>
                     </li>
                     <li class="hover <?=isset($sub1) && $sub1 == 'sub-listlab'? 'active':''?>">

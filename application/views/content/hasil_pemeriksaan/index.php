@@ -283,15 +283,13 @@
       type:'POST',
       data:{notransaksi:notransaksi},
       success:function(resp){
-        console.log(resp.Ct_value);
-        console.log(resp);
-        $('#NoPatologi').val(resp.Nolab);
+        $('#NoPatologi').val(resp.NoLab);
         $('#NoTran').val(resp.NoTran);
         $('#Regno').val(resp.Regno);
         $('#Medrec').val(resp.MedRec);
         $('#Firstname').val(resp.Firstname);
         $('#KdDokter').val(resp.KdDoc);
-        $('#TglSampel').val(resp.TglSampel);
+        $('#TglSampel').val(resp.TglSampel ? resp.TglSampel : '');
         $('#AsalSampel').val(resp.AsalSampel);
         $('#Regdate').val(resp.Regdate.substring(0,10));
         $("input[name=KdSex][value=" + resp.KdSex + "]").attr('checked', 'checked');
@@ -300,8 +298,8 @@
         $('#UmurBln').val(myArray[1]);
         $('#UmurHari').val(myArray[2]);
         $('#Ct_value').val(resp.Ct_value);
-        $('#TglHasil').val(resp.Tglhasil.substring(0,10));
-        $('#JamHasil').val(resp.Tglhasil.substring(11,19));
+        $('#TglHasil').val(resp.TglHasil.substring(0,10));
+        $('#JamHasil').val(resp.TglHasil.substring(11,19));
         // $('#ttd').val("ttd").trigger('change').attr('checked', 'checked').prop('checked');
       }
     });
